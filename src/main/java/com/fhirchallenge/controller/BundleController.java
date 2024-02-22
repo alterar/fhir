@@ -67,12 +67,14 @@ public class BundleController {
 
         ArrayList<EncounterVo> str = new ArrayList<EncounterVo>();
         RestTemplate restTemplate = new RestTemplate();
-
+        logger.info(String.valueOf(servi.size()));
         for (int i = 0; i < servi.size(); i++) {
             logger.info(servi.get(i).getFhirBundleId());
             ResponseEntity<EncounterVo> resp = restTemplate.getForEntity(String.format("http://hapi.fhir.org/baseR4/Encounter/%s/_history/1", servi.get(i).getFhirBundleId()), EncounterVo.class);
             str.add(resp.getBody());
         }
+
+        logger.info(String.valueOf(str.size()));
         pvo.setEncounterVo(str);
 
         return pvo;
@@ -84,7 +86,7 @@ public class BundleController {
             @ApiResponse(description = "No Content", responseCode = "204", content = @Content), @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
             @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content), @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content) })
-    public BundleVo findByUrn(@PathVariable(value = "urn") String urn) {
+    public BundleVo findByEncounterUrn(@PathVariable(value = "urn") String urn) {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<BundleVo> resp = restTemplate.getForEntity(String.format("https://hapi.fhir.org/baseR4/Encounter?identifier=urn:uh-encounter-id|%s", urn), BundleVo.class);
         return resp.getBody();

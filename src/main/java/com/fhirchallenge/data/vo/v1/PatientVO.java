@@ -63,27 +63,17 @@ public class PatientVO implements Serializable {
         this.firstName = firstName;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PatientVO patient = (PatientVO) o;
-        return Objects.equals(id, patient.id) && Objects.equals(lastName, patient.lastName) && Objects.equals(firstName, patient.firstName) && Objects.equals(fhirId, patient.fhirId);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, lastName, firstName, fhirId);
-    }
 
     public ArrayList<com.fhirchallenge.data.vo.fhir.EncounterVo> getEncounterVo() {
-        return EncounterVo;
+        return Encounter;
     }
 
-    public void setEncounterVo(ArrayList<com.fhirchallenge.data.vo.fhir.EncounterVo> encounterVo) {
-        EncounterVo = encounterVo;
+    public void setEncounterVo(ArrayList<com.fhirchallenge.data.vo.fhir.EncounterVo> encounter) {
+        Encounter = encounter;
     }
 
-    @JsonProperty(value = "encounter")
-    private ArrayList<EncounterVo> EncounterVo;
+    private ArrayList<EncounterVo> Encounter;
+
+
 }
