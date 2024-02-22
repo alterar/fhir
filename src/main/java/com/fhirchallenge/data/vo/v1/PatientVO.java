@@ -1,6 +1,7 @@
 package com.fhirchallenge.data.vo.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fhirchallenge.data.vo.fhir.EncounterVo;
 import jakarta.persistence.*;
 
@@ -10,6 +11,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "patient")
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_EMPTY)
 public class PatientVO implements Serializable {
     private static final long serialVersionUID = 1L;
 

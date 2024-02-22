@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/api/patient/v1")
-@Tag(name = "Patient")
+@Tag(name = "Patient", description = "Endpoints para paciente")
 public class PatientController {
     @Autowired
     private PatientService service;

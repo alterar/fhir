@@ -5,6 +5,10 @@ import com.fhirchallenge.data.vo.v1.BundleVO;
 import com.fhirchallenge.data.vo.v1.PatientVO;
 import com.fhirchallenge.services.BundleService;
 import com.fhirchallenge.services.PatientService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,7 +23,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/bundle/v1")
-@Tag(name = "Bundle")
+@Tag(name = "Bundle", description = "Endpoints para bundles")
 public class BundleController {
     @Autowired
     private BundleService service;
@@ -30,17 +34,32 @@ public class BundleController {
     private Logger logger = Logger.getLogger(BundleService.class.getName());
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Busca recursos de consulta pelo id", description = "Busca recursos de consulta pelo id", tags = { "Bundle" }, responses = {
+            @ApiResponse(description = "Success", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BundleVO.class))),
+            @ApiResponse(description = "No Content", responseCode = "204", content = @Content), @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+            @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content), @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+            @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content) })
     public List<BundleVO> findByPatient(@PathVariable(value = "id") Long id) {
         return service.findByPatient(id);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Busca recursos", description = "Busca recursos", tags = { "Bundle" }, responses = {
+            @ApiResponse(description = "Success", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BundleVO.class))),
+            @ApiResponse(description = "No Content", responseCode = "204", content = @Content), @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+            @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content), @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+            @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content) })
     public List<BundleVO> findAll() {
         return service.findAll();
     }
 
 
     @GetMapping(value = "/fhir/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Busca recursos fhir de consulta pelo id", description = "Retorna informação Fhir das consultas pelo id", tags = { "Bundle" }, responses = {
+            @ApiResponse(description = "Success", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BundleVO.class))),
+            @ApiResponse(description = "No Content", responseCode = "204", content = @Content), @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+            @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content), @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+            @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content) })
     public PatientVO findByFhir(@PathVariable(value = "id") Long id) {
         var pvo = patientService.findById(id);
         var servi = service.findByPatient(id);

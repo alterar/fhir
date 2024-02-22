@@ -1,6 +1,7 @@
 package com.fhirchallenge.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "patient")
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_EMPTY)
 public class Patient implements Serializable {
     private static final long serialVersionUID = 1L;
 
