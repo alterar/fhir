@@ -1,8 +1,11 @@
 package com.fhirchallenge.data.vo.v1;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fhirchallenge.data.vo.fhir.EncounterVo;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 
 @Entity
@@ -70,4 +73,15 @@ public class PatientVO implements Serializable {
     public int hashCode() {
         return Objects.hash(id, lastName, firstName, fhirId);
     }
+
+    public ArrayList<com.fhirchallenge.data.vo.fhir.EncounterVo> getEncounterVo() {
+        return EncounterVo;
+    }
+
+    public void setEncounterVo(ArrayList<com.fhirchallenge.data.vo.fhir.EncounterVo> encounterVo) {
+        EncounterVo = encounterVo;
+    }
+
+    @JsonProperty(value = "encounter")
+    private ArrayList<EncounterVo> EncounterVo;
 }

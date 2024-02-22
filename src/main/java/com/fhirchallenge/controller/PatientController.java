@@ -2,6 +2,7 @@ package com.fhirchallenge.controller;
 
 import java.util.List;
 
+import com.fhirchallenge.data.vo.fhir.EncounterVo;
 import com.fhirchallenge.data.vo.fhir.PatientFhirVo;
 import com.fhirchallenge.data.vo.v1.PatientVO;
 import com.fhirchallenge.data.vo.v2.PatientVOV2;

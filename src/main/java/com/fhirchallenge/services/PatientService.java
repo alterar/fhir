@@ -4,7 +4,6 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.List;
 import java.util.logging.Logger;
 
-import com.fhirchallenge.data.vo.fhir.PatientFhirVo;
 import com.fhirchallenge.data.vo.v1.PatientVO;
 import com.fhirchallenge.data.vo.v2.PatientVOV2;
 import com.fhirchallenge.exception.ResourceNotFoundException;

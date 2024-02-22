@@ -1,8 +1,10 @@
 package com.fhirchallenge.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 
 @Entity
@@ -57,6 +59,7 @@ public class Patient implements Serializable {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
 
     @Override
     public boolean equals(Object o) {
